@@ -1,0 +1,15 @@
+{
+    "require": {
+        "silex/silex": "1.0.*",
+        "symfony/twig-bridge": "2.1.*",
+        "twig/twig": ">=1.8,<2.0-dev",
+        "symfony/yaml" : "2.1.0",
+        "doctrine/mongodb": "*",
+        "mheap/Silex-Mongo": "*",
+        "wisembly/elephant.io" : "*",
+        "symfony/http-kernel" : "*"
+    },
+
+    
+    "minimum-stability": "dev"
+}

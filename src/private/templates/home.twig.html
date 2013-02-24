@@ -1,0 +1,54 @@
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="http://127.0.0.1/src/public/assets/css/discuss.css" rel="stylesheet">
+<link href="http://127.0.0.1/src/public/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+<script src="http://127.0.0.1/src/public/assets/bootstrap/js/bootstrap.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script src="http://127.0.0.1/src/public/assets/js/socket/socket.io.js"></script> 
+<script type="text/javascript" canvas="myCanvas">
+function run()
+{
+
+    var socket = io.connect('http://localhost:1337');
+
+    socket.on('new_message', function(data){ 
+        console.log(' got new message ');
+        $("#discussion-box").append("<p>User: " + data.user + "</p><p>Message: " + data.message + "</p>");
+    });
+}
+
+$(document).ready(function() {
+    run();
+});
+</script>
+</head>
+
+
+
+
+<body>
+<div class="container">
+<h1>Discuss.</h1>
+
+{% include notification ignore missing %}
+
+<div id="discussion-box">
+	{% for message in messages %}
+		<div class="message">
+			<p><strong>User:</strong> {{message.user}}</p>
+			<p><strong>Message:</strong> {{message.message}}</p>
+		</div>
+	{% endfor %}
+</div>
+
+<div id="message-form">
+	<form action="/src/public/index.php" method="post">
+		Username: <input type="text" name="user"><br>
+		Message: <input type="text" name="message"><br>
+		<button type="submit" class="btn">Submit.</button>
+	</form>
+</div>
+</div>
+</body>
